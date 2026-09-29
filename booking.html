@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Social Audit - WSPG</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
+
+        <!-- Icon Font Stylesheet -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet">
+
+        <style>
+            .audit-card {
+                background: #ffffff;
+                border-radius: 12px;
+                padding: 2rem;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+                border: 1px solid #eef0f3;
+                height: 100%;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .audit-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            }
+            .audit-icon {
+                width: 60px;
+                height: 60px;
+                background-color: rgba(19, 53, 123, 0.1);
+                color: #13357B;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.5rem;
+                margin-bottom: 1.25rem;
+            }
+            .report-download-item {
+                background: #ffffff;
+                border: 1px solid #e2e8f0;
+                border-radius: 10px;
+                padding: 1.25rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                transition: all 0.2s ease;
+            }
+            .report-download-item:hover {
+                border-color: #13357B;
+                background-color: #f8fafc;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+        <!-- Topbar Start -->
+        <div class="container-fluid bg-primary px-5 d-none d-lg-block">
+            <div class="row gx-0">
+                <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
+                    <div class="d-inline-flex align-items-center" style="height: 45px;">
+                        <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href="#"><i class="fab fa-facebook-f fw-normal"></i></a>
+                        <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href="#"><i class="fab fa-twitter fw-normal"></i></a>
+                        <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href="#"><i class="fab fa-instagram fw-normal"></i></a>
+                        <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle" href="#"><i class="fab fa-youtube fw-normal"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center text-lg-end">
+                    <div class="d-inline-flex align-items-center" style="height: 45px;">
+                        <a href="#"><small class="me-3 text-light"><i class="fa fa-user me-2"></i>Register</small></a>
+                        <a href="#"><small class="text-light"><i class="fa fa-sign-in-alt me-2"></i>Login</small></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Topbar End -->
+
+        <!-- Navbar Start -->
+        <div class="container-fluid position-relative p-0">
+            <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="index.html" class="navbar-brand p-0">
+                    <h1 class="m-0"><img src="wspg.png" alt="WSPG Logo"> WSPG</h1>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                        <a href="index.html" class="nav-item nav-link">Home</a>
+                        <a href="about.html" class="nav-item nav-link">About</a>
+                        <a href="services.html" class="nav-item nav-link">Our Team</a>
+                        <a href="packages.html" class="nav-item nav-link">Our Network</a>
+                        <a href="blog.html" class="nav-item nav-link">Our Activity</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">More</a>
+                            <div class="dropdown-menu m-0">
+                                <a href="destination.html" class="dropdown-item">Gallery</a>
+                                <a href="tour.html" class="dropdown-item">Our Publications</a>
+                                <a href="booking.html" class="dropdown-item">Social Audit</a>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!-- Navbar End -->
+
+        <!-- Header Start -->
+        <div class="container-fluid bg-breadcrumb">
+            <div class="container text-center py-5" style="max-width: 900px;">
+                <h3 class="text-white display-3 mb-4">Social Audit</h3>
+                <ol class="breadcrumb justify-content-center mb-0">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active text-white">Social Audit</li>
+                </ol>    
+            </div>
+        </div>
+        <!-- Header End -->
+
+        <!-- Overview Section Start -->
+        <div class="container-fluid py-5">
+            <div class="container py-3">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-12">
+                        <div class="bg-light p-4 p-md-5 rounded-3 shadow-sm border-start border-4 border-primary">
+                            <h5 class="section-title text-start pe-3 mb-3">Transparency & Governance</h5>
+                            <h2 class="mb-4">Understanding Social Audit at WSPG</h2>
+                            <p class="fs-5 text-dark leading-relaxed">
+                                A <strong>Social Audit</strong> is an official process through which Women Security Pressure Group (WSPG) measures, understands, reports, and improves its social performance and impact. It ensures complete accountability to the communities we serve, our donors, stakeholders, and government bodies.
+                            </p>
+                            <p class="fs-5 text-dark leading-relaxed mb-0">
+                                Through public social audit meetings, program evaluations, and financial disclosures, WSPG reviews resource allocation, project outcomes, and beneficiary feedback to maintain the highest standards of integrity and social responsibility.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Overview Section End -->
+
+        <!-- Core Objectives Grid Start -->
+        <div class="container-fluid py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto text-center mb-5" style="max-width: 800px;">
+                    <h5 class="section-title px-3">Our Commitments</h5>
+                    <h2 class="mb-0">Pillars of Our Social Audit</h2>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="audit-card text-center">
+                            <div class="audit-icon mx-auto">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h4 class="fs-5 fw-bold mb-2">Transparency</h4>
+                            <p class="text-muted fs-6 mb-0">Open sharing of financial statements, annual budgets, and project expenditures with the public.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="audit-card text-center">
+                            <div class="audit-icon mx-auto">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h4 class="fs-5 fw-bold mb-2">Community Feedback</h4>
+                            <p class="text-muted fs-6 mb-0">Direct engagement with community members and victims to evaluate real-world project impact.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="audit-card text-center">
+                            <div class="audit-icon mx-auto">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h4 class="fs-5 fw-bold mb-2">Impact Evaluation</h4>
+                            <p class="text-muted fs-6 mb-0">Measuring quantitative and qualitative outcomes of our anti-violence campaigns and advocacy.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="audit-card text-center">
+                            <div class="audit-icon mx-auto">
+                                <i class="fas fa-balance-scale"></i>
+                            </div>
+                            <h4 class="fs-5 fw-bold mb-2">Good Governance</h4>
+                            <p class="text-muted fs-6 mb-0">Adhering strictly to national NGO regulations, institutional ethics, and stakeholder standards.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Core Objectives Grid End -->
+
+        <!-- Downloadable Audit Reports Start -->
+        <div class="container-fluid py-5">
+            <div class="container py-3">
+                <div class="mx-auto text-center mb-5" style="max-width: 800px;">
+                    <h5 class="section-title px-3">Public Records</h5>
+                    <h2 class="mb-0">Social Audit Documents & Reports</h2>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="d-flex flex-column gap-3">
+
+                            <!-- Report Item 1 -->
+                            <div class="report-download-item flex-column flex-md-row gap-3 text-center text-md-start">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="text-primary fs-2">
+                                        <i class="fas fa-file-pdf"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-1 fw-bold">Social Audit 1 in Progress</h5>
+                                        <span class="text-muted fs-6">Published: October 2024 • Format: PDF • Size: 2.4 MB</span>
+                                    </div>
+                                </div>
+                                <a href="#" target="_blank" class="btn btn-primary rounded-pill px-4 btn-sm align-self-center align-self-md-auto">
+                                    <i class="fas fa-download me-2"></i>Download PDF
+                                </a>
+                            </div>
+
+                            <!-- Report Item 2 -->
+                            <div class="report-download-item flex-column flex-md-row gap-3 text-center text-md-start">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="text-primary fs-2">
+                                        <i class="fas fa-file-pdf"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-1 fw-bold">In Progress</h5>
+                                        <span class="text-muted fs-6">Published: November 2023 • Format: PDF • Size: 3.1 MB</span>
+                                    </div>
+                                </div>
+                                <a href="#" target="_blank" class="btn btn-primary rounded-pill px-4 btn-sm align-self-center align-self-md-auto">
+                                    <i class="fas fa-download me-2"></i>Download PDF
+                                </a>
+                            </div>
+
+                            <!-- Report Item 3 -->
+                            <div class="report-download-item flex-column flex-md-row gap-3 text-center text-md-start">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="text-primary fs-2">
+                                        <i class="fas fa-file-pdf"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-1 fw-bold">In Progress</h5>
+                                        <span class="text-muted fs-6">Published: December 2022 • Format: PDF • Size: 1.8 MB</span>
+                                    </div>
+                                </div>
+                                <a href="#" target="_blank" class="btn btn-primary rounded-pill px-4 btn-sm align-self-center align-self-md-auto">
+                                    <i class="fas fa-download me-2"></i>Download PDF
+                                </a>
+                            </div>
+
+                            <!-- Report Item 4 -->
+                            <div class="report-download-item flex-column flex-md-row gap-3 text-center text-md-start">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="text-primary fs-2">
+                                        <i class="fas fa-file-pdf"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-1 fw-bold">In progress</h5>
+                                        <span class="text-muted fs-6">Institutional Document • Format: PDF • Size: 1.2 MB</span>
+                                    </div>
+                                </div>
+                                <a href="#" target="_blank" class="btn btn-primary rounded-pill px-4 btn-sm align-self-center align-self-md-auto">
+                                    <i class="fas fa-download me-2"></i>Download PDF
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Downloadable Audit Reports End -->
+
+        <!-- Footer Start -->
+        <div class="container-fluid footer py-5">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-md-6 col-lg-6 col-xl-5">
+                        <div class="footer-item d-flex flex-column contact-item-box">
+                            <h3 class="mb-4 text-white font-weight-bold">Get In Touch</h3>
+                            
+                            <div class="d-flex align-items-start mb-3">
+                                <div class="contact-icon-bg me-3 mt-1"><i class="fas fa-map-marker-alt text-white"></i></div>
+                                <div>
+                                    <span class="text-light fw-bold d-block mb-1">Address</span>
+                                    <span class="text-white-50 fs-5">Gyaneshwor, Kathmandu-10, Nepal</span>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-start mb-3">
+                                <div class="contact-icon-bg me-3 mt-1"><i class="fas fa-phone-alt text-white"></i></div>
+                                <div>
+                                    <span class="text-light fw-bold d-block mb-1">Phone</span>
+                                    <a href="tel:014519339" class="text-white-50 fs-5 text-decoration-none me-3">01-4519339</a>
+                                    <a href="tel:014519845" class="text-white-50 fs-5 text-decoration-none">01-4519845</a>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-start mb-3">
+                                <div class="contact-icon-bg me-3 mt-1"><i class="fas fa-envelope text-white"></i></div>
+                                <div>
+                                    <span class="text-light fw-bold d-block mb-1">Email</span>
+                                    <a href="mailto:wspg.nepal@gmail.com" class="text-white-50 fs-5 text-decoration-none">wspg.nepal@gmail.com</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-3">
+                        <div class="footer-item d-flex flex-column">
+                            <h4 class="mb-4 text-white">Quick Links</h4>
+                            <a href="about.html" class="text-white-50 fs-5 mb-2"><i class="fas fa-angle-right me-2"></i>About Us</a>
+                            <a href="services.html" class="text-white-50 fs-5 mb-2"><i class="fas fa-angle-right me-2"></i>Our Team</a>
+                            <a href="packages.html" class="text-white-50 fs-5 mb-2"><i class="fas fa-angle-right me-2"></i>Our Network</a>
+                            <a href="blog.html" class="text-white-50 fs-5 mb-2"><i class="fas fa-angle-right me-2"></i>Our Activity</a>
+                            <a href="contact.html" class="text-white-50 fs-5 mb-2"><i class="fas fa-angle-right me-2"></i>Contact Us</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-4">
+                        <div class="footer-item d-flex flex-column">
+                            <h4 class="mb-4 text-white">Our Mission</h4>
+                            <p class="text-white-50 fs-5 mb-3">Empowering women and ensuring equal representation, protection, and social justice across Nepal since 1991.</p>
+                            <a href="about.html" class="btn btn-outline-light rounded-pill py-2 px-4 w-auto me-auto mt-2">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        
+        <!-- Copyright Start -->
+        <div class="container-fluid copyright text-body py-4">
+            <div class="container text-center text-md-start">
+                <i class="fas fa-copyright me-2"></i><a class="text-white" href="#">Women Security Pressure Group</a>, All rights reserved.
+            </div>
+        </div>
+        <!-- Copyright End -->
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-primary btn-primary-outline-0 btn-md-square back-to-top"><i class="fa fa-arrow-up"></i></a>   
+
+        <!-- JavaScript Libraries -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="lib/lightbox/js/lightbox.min.js"></script>
+
+        <!-- Template Javascript -->
+        <script src="js/main.js"></script>
+    </body>
+
+</html>

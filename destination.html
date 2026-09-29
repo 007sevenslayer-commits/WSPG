@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Gallery - WSPG</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
+
+        <!-- Icon Font Stylesheet -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet">
+
+        <style>
+            /* Gallery Layout Styles */
+            .gallery-item {
+                position: relative;
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+                display: block;
+                text-decoration: none;
+                cursor: pointer;
+                background-color: #fff;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .gallery-item:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            }
+            .gallery-item img {
+                width: 100%;
+                height: 280px;
+                object-fit: cover;
+                display: block;
+                transition: transform 0.4s ease;
+            }
+            .gallery-item-tall img {
+                height: 585px;
+            }
+
+            .gallery-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.35);
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 2;
+            }
+            .gallery-item:hover img {
+                transform: scale(1.05);
+            }
+            .gallery-item:hover .gallery-overlay {
+                opacity: 1;
+            }
+            .zoom-badge {
+                width: 48px;
+                height: 48px;
+                background: #ffffff;
+                color: #13357B;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.1rem;
+                transform: scale(0.8);
+                transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            }
+            .gallery-item:hover .zoom-badge {
+                transform: scale(1);
+                background: #13357B;
+                color: #ffffff;
+            }
+
+            .wide-banner-item {
+                position: relative;
+                border-radius: 10px;
+                overflow: hidden;
+            }
+            .wide-banner-item img {
+                width: 100%;
+                height: 380px;
+                object-fit: cover;
+            }
+
+            /* Featured Spotlight Format Styling */
+            .spotlight-card {
+                position: relative;
+                border-radius: 12px;
+                overflow: hidden;
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            }
+            .spotlight-card img {
+                width: 100%;
+                height: 400px;
+                object-fit: cover;
+                transition: transform 0.5s ease;
+            }
+            .spotlight-card:hover img {
+                transform: scale(1.04);
+            }
+
+            /* Moving Micro Tile Strip */
+            .micro-grid-wrapper {
+                overflow: hidden;
+                position: relative;
+                width: 100%;
+                background: #f8f9fa;
+                padding: 12px 0;
+            }
+            .micro-grid-track {
+                display: flex;
+                width: max-content;
+                animation: scrollGrid 40s linear infinite;
+            }
+            .micro-grid-wrapper:hover .micro-grid-track {
+                animation-play-state: paused;
+            }
+            .micro-tile {
+                flex: 0 0 160px;
+                height: 110px;
+                margin: 0 6px;
+                border-radius: 6px;
+                overflow: hidden;
+                position: relative;
+            }
+            .micro-tile img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+            .micro-tile:hover img {
+                transform: scale(1.1);
+            }
+
+            @keyframes scrollGrid {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(-50%); }
+            }
+
+            @media (max-width: 1199.98px) {
+                .gallery-item-tall img {
+                    height: 280px;
+                }
+            }
+            @media (max-width: 768px) {
+                .wide-banner-item img,
+                .spotlight-card img {
+                    height: 260px;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <!-- Spinner -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+
+        <!-- Topbar -->
+        <div class="container-fluid bg-primary px-5 d-none d-lg-block">
+            <div class="row gx-0">
+                <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
+                    <div class="d-inline-flex align-items-center" style="height: 45px;">
+                        <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href="#"><i class="fab fa-facebook-f fw-normal"></i></a>
+                        <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href="#"><i class="fab fa-twitter fw-normal"></i></a>
+                        <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href="#"><i class="fab fa-instagram fw-normal"></i></a>
+                        <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle" href="#"><i class="fab fa-youtube fw-normal"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center text-lg-end">
+                    <div class="d-inline-flex align-items-center" style="height: 45px;">
+                        <a href="#"><small class="me-3 text-light"><i class="fa fa-user me-2"></i>Register</small></a>
+                        <a href="#"><small class="text-light"><i class="fa fa-sign-in-alt me-2"></i>Login</small></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar -->
+        <div class="container-fluid position-relative p-0">
+            <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="index.html" class="navbar-brand p-0">
+                    <h1 class="m-0"><img src="wspg.png" alt="WSPG Logo"> WSPG</h1>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                        <a href="index.html" class="nav-item nav-link">Home</a>
+                        <a href="about.html" class="nav-item nav-link">About</a>
+                        <a href="services.html" class="nav-item nav-link">Our Team</a>
+                        <a href="packages.html" class="nav-item nav-link">Our Network</a>
+                        <a href="blog.html" class="nav-item nav-link">Our Activity</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">More</a>
+                            <div class="dropdown-menu m-0">
+                                <a href="destination.html" class="dropdown-item active">Gallery</a>
+                                <a href="tour.html" class="dropdown-item">Our Publications</a>
+                                <a href="booking.html" class="dropdown-item">Social Audit</a>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Header -->
+        <div class="container-fluid bg-breadcrumb">
+            <div class="container text-center py-5" style="max-width: 900px;">
+                <h3 class="text-white display-3 mb-4">Gallery</h3>
+                <ol class="breadcrumb justify-content-center mb-0">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active text-white">Gallery</li>
+                </ol>    
+            </div>
+        </div>
+
+        <!-- SECTION 1: Standard Photo Gallery Grid -->
+        <div class="container-fluid py-5">
+            <div class="container py-3">
+                <div class="row g-4" id="mainGridContainer">
+                    <!-- Dynamic Images Render Here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: Wide Carousel -->
+        <div class="container-fluid py-5 bg-light">
+            <div class="container">
+                <div class="owl-carousel wide-viewer-carousel" id="carouselContainer">
+                    <!-- Dynamic Carousel Renders Here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: Large Dual Spotlight Banner Format -->
+        <div class="container-fluid py-5">
+            <div class="container">
+                <div class="row g-4" id="spotlightContainer">
+                    <!-- Dynamic Spotlight Banners Render Here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 4: Continuous Moving Micro Tile Strip -->
+        <div class="container-fluid py-4 bg-light border-top border-bottom">
+            <div class="micro-grid-wrapper">
+                <div class="micro-grid-track" id="microGridTrack">
+                    <!-- Dynamic Moving Tiles Render Here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="container-fluid footer py-5">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-md-6 col-lg-6 col-xl-5">
+                        <div class="footer-item d-flex flex-column contact-item-box">
+                            <h3 class="mb-4 text-white font-weight-bold">Get In Touch</h3>
+                            <div class="d-flex align-items-start mb-3">
+                                <div class="contact-icon-bg me-3 mt-1"><i class="fas fa-map-marker-alt text-white"></i></div>
+                                <div>
+                                    <span class="text-light fw-bold d-block mb-1">Address</span>
+                                    <span class="text-white-50 fs-5">Gyaneshwor, Kathmandu-10, Nepal</span>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start mb-3">
+                                <div class="contact-icon-bg me-3 mt-1"><i class="fas fa-phone-alt text-white"></i></div>
+                                <div>
+                                    <span class="text-light fw-bold d-block mb-1">Phone</span>
+                                    <a href="tel:014519339" class="text-white-50 fs-5 text-decoration-none me-3">01-4519339</a>
+                                    <a href="tel:014519845" class="text-white-50 fs-5 text-decoration-none">01-4519845</a>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start mb-3">
+                                <div class="contact-icon-bg me-3 mt-1"><i class="fas fa-envelope text-white"></i></div>
+                                <div>
+                                    <span class="text-light fw-bold d-block mb-1">Email</span>
+                                    <a href="mailto:wspg.nepal@gmail.com" class="text-white-50 fs-5 text-decoration-none">wspg.nepal@gmail.com</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="container-fluid copyright text-body py-4">
+            <div class="container text-center text-md-start">
+                <i class="fas fa-copyright me-2"></i><a class="text-white" href="#">Women Security Pressure Group</a>, All rights reserved.
+            </div>
+        </div>
+
+        <a href="#" class="btn btn-primary btn-primary-outline-0 btn-md-square back-to-top"><i class="fa fa-arrow-up"></i></a>    
+
+        <!-- Scripts -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="lib/lightbox/js/lightbox.min.js"></script>
+        <script src="js/main.js"></script>
+
+        <script>
+            // Master list containing all 32 unique images
+            const allImages = [
+                '0.jpg',
+                '20250307_122720.jpg',
+                'about-img.jpg',
+                'add1.jpg',
+                'add2.jpg',
+                'add3.jpg',
+                'add4.jpg',
+                'add5.jpg',
+                'blog-1.jpg',
+                'blog-2.jpg',
+                'blog-3.jpg',
+                'blog-4.jpg',
+                'carousel-1.jpg',
+                'carousel-2.jpg',
+                'carousel-3.jpg',
+                'carousel-4.jpg',
+                'carousel-5.jpg',
+                'carousel-6.jpg',
+                'cover.jpg',
+                'gallery-1.jpg',
+                'gallery-2.jpg',
+                'gallery-3.jpg',
+                'gallery-4.jpg',
+                'gallery-5.jpg',
+                'gallery-6.jpg',
+                'gallery-7.jpg',
+                'gallery-8.jpg',
+                'gallery-9.jpg',
+                'gallery-10.jpg',
+                'gallery-11.jpg',
+                'gallery-12.jpg',
+                'vision.jpg'
+            ];
+
+            $(document).ready(function() {
+                // 1. Render Main Grid (All images fit directly into your standard layout)
+                let mainHtml = `<div class="col-xl-8"><div class="row g-4">`;
+                for(let i = 0; i < Math.min(4, allImages.length); i++) {
+                    mainHtml += `
+                        <div class="col-md-6">
+                            <a href="img/${allImages[i]}" data-lightbox="wspg-gallery" class="gallery-item">
+                                <img src="img/${allImages[i]}" alt="WSPG Gallery Image">
+                                <div class="gallery-overlay"><div class="zoom-badge"><i class="fa fa-search-plus"></i></div></div>
+                            </a>
+                        </div>`;
+                }
+                mainHtml += `</div></div>`;
+
+                if(allImages[4]) {
+                    mainHtml += `
+                        <div class="col-xl-4">
+                            <a href="img/${allImages[4]}" data-lightbox="wspg-gallery" class="gallery-item gallery-item-tall">
+                                <img src="img/${allImages[4]}" alt="WSPG Tall Image">
+                                <div class="gallery-overlay"><div class="zoom-badge"><i class="fa fa-search-plus"></i></div></div>
+                            </a>
+                        </div>`;
+                }
+
+                for(let i = 5; i < allImages.length; i++) {
+                    mainHtml += `
+                        <div class="col-md-6 col-lg-4">
+                            <a href="img/${allImages[i]}" data-lightbox="wspg-gallery" class="gallery-item">
+                                <img src="img/${allImages[i]}" alt="WSPG Gallery Image">
+                                <div class="gallery-overlay"><div class="zoom-badge"><i class="fa fa-search-plus"></i></div></div>
+                            </a>
+                        </div>`;
+                }
+                $('#mainGridContainer').html(mainHtml);
+
+                // 2. Render Wide Carousel (Loops all images)
+                let carouselHtml = '';
+                allImages.forEach(img => {
+                    carouselHtml += `
+                        <div class="wide-banner-item gallery-item">
+                            <a href="img/${img}" data-lightbox="wspg-wide">
+                                <img src="img/${img}" alt="Featured Carousel Slide">
+                                <div class="gallery-overlay"><div class="zoom-badge"><i class="fa fa-search-plus"></i></div></div>
+                            </a>
+                        </div>`;
+                });
+                $('#carouselContainer').html(carouselHtml);
+
+                $(".wide-viewer-carousel").owlCarousel({
+                    autoplay: true,
+                    smartSpeed: 800,
+                    dots: true,
+                    loop: true,
+                    margin: 24,
+                    nav: false,
+                    responsive: {
+                        0: { items: 1 },
+                        768: { items: 2 },
+                        992: { items: 2 }
+                    }
+                });
+
+                // 3. Render Dual Spotlight (Uses top 2 highlight images)
+                let spotlightHtml = `
+                    <div class="col-lg-6">
+                        <a href="img/${allImages[0]}" data-lightbox="wspg-spotlight" class="gallery-item spotlight-card">
+                            <img src="img/${allImages[0]}" alt="Spotlight Showcase 1">
+                            <div class="gallery-overlay"><div class="zoom-badge"><i class="fa fa-search-plus"></i></div></div>
+                        </a>
+                    </div>
+                    <div class="col-lg-6">
+                        <a href="img/${allImages[1]}" data-lightbox="wspg-spotlight" class="gallery-item spotlight-card">
+                            <img src="img/${allImages[1]}" alt="Spotlight Showcase 2">
+                            <div class="gallery-overlay"><div class="zoom-badge"><i class="fa fa-search-plus"></i></div></div>
+                        </a>
+                    </div>`;
+                $('#spotlightContainer').html(spotlightHtml);
+
+                // 4. Render Moving Micro Strip (Loops full collection smoothly)
+                let microHtml = '';
+                let microPool = [...allImages, ...allImages];
+                microPool.forEach(img => {
+                    microHtml += `
+                        <a href="img/${img}" data-lightbox="wspg-micro" class="micro-tile gallery-item">
+                            <img src="img/${img}" alt="Micro Tile Image">
+                            <div class="gallery-overlay"><div class="zoom-badge"><i class="fa fa-search-plus"></i></div></div>
+                        </a>`;
+                });
+                $('#microGridTrack').html(microHtml);
+            });
+        </script>
+    </body>
+</html>
